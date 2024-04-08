@@ -61,3 +61,4 @@ WHERE
     -- UnitPrice > 45.00 AND StockItemName LIKE 'USB%' OR StockItemName LIKE 'R%'
     UnitPrice > 45.00 AND (StockItemName LIKE 'USB%' OR StockItemName LIKE 'R%')
 ORDER BY UnitPrice;
+
