@@ -5,7 +5,6 @@ USE WideWorldImporters;
 -- Concatenation using + operator
 -- ISNULL() handles Null values and replaces with the given ('N/A')
 -- CONVERT() converts numeric values to VARCHAR() with a max length of 20 before concatenating them with other strings.
-
 SELECT TOP 10
     CountryName,
     FormalName,
@@ -18,8 +17,8 @@ SELECT TOP 10
 FROM Application.Countries
 
 -- DATE FUNCTIONS
--- Styles: https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15#date-and-time-styles
 
+-- Styles: https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15#date-and-time-styles
 SELECT
     PersonName,
     Birthday,
@@ -28,3 +27,19 @@ SELECT
     CONVERT(VARCHAR, GETDATE(), 101) AS CurrentDate,
     DATEDIFF(YEAR, Birthday, GETDATE()) AS Age
 FROM dbo.Birthdays
+
+-- AGGREGATE FUNCTIONS
+
+-- Turn a range of numbers into a single point of data
+SELECT
+SUM(TotalDryItems) AS [Overall Total Dry],
+AVG(TotalDryItems) AS [Average Sale],
+MAX(TotalDryItems) AS [Max Sale],
+MIN(TotalDryItems) AS [Min Sale],
+COUNT(*) AS [Sales Count]
+FROM Sales.Invoices
+
+-- NESTING FUNCTIONS
+SELECT
+ROUND(SUM(LastCostPrice), 0)
+FROM Warehouse.StockItemHoldings
