@@ -18,4 +18,13 @@ SELECT TOP 10
 FROM Application.Countries
 
 -- DATE FUNCTIONS
+-- Styles: https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15#date-and-time-styles
 
+SELECT
+    PersonName,
+    Birthday,
+    -- FORMAT(Birthday, 'MM-yyyy') AS BdayFormatMonthYr
+    CONVERT(VARCHAR, Birthday, 101) AS FormattedDateTime,
+    CONVERT(VARCHAR, GETDATE(), 101) AS CurrentDate,
+    DATEDIFF(YEAR, Birthday, GETDATE()) AS Age
+FROM dbo.Birthdays
