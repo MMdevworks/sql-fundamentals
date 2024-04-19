@@ -9,6 +9,38 @@ SELECT
 FROM 
     Purchasing.SupplierTransactions;
 
+-- Description: Create a merged view with UNION
+-- CREATE VIEW V_UnionDetails
+-- AS
+SELECT
+    Suppliers.SupplierName,
+    SupplierCategories.SupplierCategoryName,
+    'Primary Contact' AS ContactType,
+    People.FullName AS Contact,
+    People.PhoneNumber AS Phone,
+    People.EmailAddress AS Email
+FROM Purchasing.Suppliers
+    INNER JOIN Purchasing.SupplierCategories
+        ON Suppliers.SupplierCategoryID = SupplierCategories.SupplierCategoryID
+    INNER JOIN Application.People
+        ON Suppliers.PrimaryContactPersonID = People.PersonID
+UNION
+
+SELECT
+    Suppliers.SupplierName,
+    SupplierCategories.SupplierCategoryName,
+    'Alternate Contact' AS ContactType,
+    People.FullName AS Contact,
+    People.PhoneNumber AS Phone,
+    People.EmailAddress AS Email
+FROM Purchasing.Suppliers
+    INNER JOIN Purchasing.SupplierCategories
+        ON Suppliers.SupplierCategoryID = SupplierCategories.SupplierCategoryID
+    INNER JOIN Application.People
+        ON Suppliers.AlternateContactPersonID = People.PersonID
+;
+GO
+
 -- Description: Edit a View - Right click the view > Script as Alter. This will open a new file that will have the commands to edit the view. Example:
 SET ANSI_NULLS ON
 GO
