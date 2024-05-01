@@ -54,7 +54,7 @@ AS
 GO
 
 -- Test the stored procedure
-EXEC Warehouse.uspInsertColor @Color = 'Periwinkle Blue'; -- or remove variable name if supplied in order
+EXEC Warehouse.uspInsertColor @Color = 'Periwinkle Blue';
 
 SELECT * FROM Warehouse.Colors
 ORDER BY ColorID DESC;
