@@ -75,11 +75,19 @@ ON dbo.Birthdays
 AFTER INSERT
 AS
     INSERT INTO dbo.NewBirthdays (PersonName, Birthday)
-    VALUES (
-        (SELECT Inserted.PersonName, Birthday FROM Inserted)
+    SELECT PersonName, Birthday FROM Inserted
 
+CREATE OR ALTER PROCEDURE dbo.uspInsertBday
+    @PersonName AS nvarchar(100),
+    @Birthday AS date
+AS
+    INSERT INTO dbo.Birthdays (PersonName, Birthday)
+    VALUES (@PersonName, @Birthday);
+GO
+
+-- -- Use the stored procedure to add a color to the table
+EXEC dbo.uspInsertBday @PersonName = 'John Doe', @Birthday = '1980-11-14';
 
 -- -- View existing data
 SELECT * FROM dbo.Birthdays
-
 SELECT * FROM dbo.NewBirthdays
