@@ -50,8 +50,8 @@ SELECT * FROM Warehouse.ColorAudit;
 
 CREATE TABLE dbo.NewBirthdays (
     AuditID INT IDENTITY PRIMARY KEY,
-    Name nvarchar(20),
-    TimeAdded datetime2
+    PersonName nvarchar(20),
+    Birthday date
 );
 GO
 
@@ -69,3 +69,17 @@ GO
 -- ;
 -- GO
 
+-- Create a trigger that adds people to birthdays
+CREATE TRIGGER dbo.InsertBirthday
+ON dbo.Birthdays
+AFTER INSERT
+AS
+    INSERT INTO dbo.NewBirthdays (PersonName, Birthday)
+    VALUES (
+        (SELECT Inserted.PersonName, Birthday FROM Inserted)
+
+
+-- -- View existing data
+SELECT * FROM dbo.Birthdays
+
+SELECT * FROM dbo.NewBirthdays
