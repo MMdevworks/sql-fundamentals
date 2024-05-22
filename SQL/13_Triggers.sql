@@ -45,3 +45,27 @@ EXEC Warehouse.uspInsertColor 'Banana Yellow';
 
 -- The table's trigger inserts a new row to the audit table
 SELECT * FROM Warehouse.ColorAudit;
+
+----- EXAMPLE TRIGGER 2
+
+CREATE TABLE dbo.NewBirthdays (
+    AuditID INT IDENTITY PRIMARY KEY,
+    Name nvarchar(20),
+    TimeAdded datetime2
+);
+GO
+
+
+--  Example Table edits, remove and add columns:
+-- ALTER TABLE dbo.NewBirthdays 
+--     DROP COLUMN Name,
+--     TimeAdded
+-- ;
+-- GO
+
+-- ALTER TABLE dbo.NewBirthdays 
+--     ADD PersonName nvarchar(20),
+--     Birthday date
+-- ;
+-- GO
+
